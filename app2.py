@@ -10,6 +10,10 @@ app = Flask(__name__)
 def hello():
     return 'HelloWorld'
 
+@app.route('/status', methods=['GET'])
+def validar():
+	hola='a'
+	return ' '
 
 @app.route('/validarFirma', methods=['POST'])
 def validar():
