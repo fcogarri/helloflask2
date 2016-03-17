@@ -22,7 +22,7 @@ def validar():
 	if hashComparar == hash:
 		respuesta =True
 
-	respuestaFinal = jsonify({'valido:':respuesta, 'mensaje:':mensaje})
+	respuestaFinal = jsonify({'valido:':respuesta, 'mensaje:':mensaje,'hashReal:':hash,'hashCalculado:':hashComparar})
 	return respuestaFinal
 
 
