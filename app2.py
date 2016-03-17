@@ -11,17 +11,15 @@ def hello():
     return 'HelloWorld'
 
 
-@app.route('/status', methods=['GET'])
-def validar():
-	hola='a'
-	return render_template('status.html'), 201
+
 
 @app.route('/validarFirma', methods=['POST'])
 def validar():
 	mensaje = request.form['mensaje']
 	hash = request.form['hash']
 	respuesta = 'Falso'
-	mensaje2=remove_accents(mensaje)
+	mensaje2=mensaje.upper()
+	mensaje3=mensaje2.lower()
 
 	h = hashlib.sha256()
 	h.update(mensaje2)
