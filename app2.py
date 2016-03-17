@@ -32,7 +32,7 @@ def validar():
 	mensaje4=mensaje3.lower()
 	h = hashlib.sha256()
 	h.update(mensaje)
-	#h.update('hola')
+	
 	hashComparar = h.hexdigest()
 
 	if hashComparar.lower() == hash.lower():
