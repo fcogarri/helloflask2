@@ -13,7 +13,7 @@ def hello():
 @app.route('/status', methods=['GET'])
 def validar():
 	hola='a'
-	return ' '
+	return render_template('hello.html'), 201
 
 @app.route('/validarFirma', methods=['POST'])
 def validar():
