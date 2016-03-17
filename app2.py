@@ -19,7 +19,7 @@ def validar():
 	h.update(mensaje)
 	hashComparar = h.hexdigest()
 
-	if hashComparar == hash:
+	if hashComparar.lower() == hash.lower():
 		respuesta =True
 
 	respuestaFinal = jsonify({'valido:':respuesta, 'mensaje:':mensaje,'hashReal:':hash,'hashCalculado:':hashComparar})
