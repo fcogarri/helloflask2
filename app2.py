@@ -1,6 +1,7 @@
 import os
 import hashlib
 from flask import Flask, jsonify, request
+import unicodedata 
 
 app = Flask(__name__)
 
@@ -14,9 +15,10 @@ def validar():
 	mensaje = request.form['mensaje']
 	hash = request.form['hash']
 	respuesta = False
+	mensaje2=remove_accents(mensaje)
 
 	h = hashlib.sha256()
-	h.update(mensaje)
+	h.update(mensaje2)
 	hashComparar = h.hexdigest()
 
 	if hashComparar.lower() == hash.lower():
@@ -25,6 +27,13 @@ def validar():
 	respuestaFinal = jsonify({'valido:':respuesta, 'mensaje:':mensaje,'hashReal:':hash,'hashCalculado:':hashComparar})
 	return respuestaFinal
 
+
+
+
+def remove_accents(input_str):
+    nfkd_form = unicodedata.normalize('NFKD', input_str)
+    only_ascii = nfkd_form.encode('ASCII', 'ignore')
+    return only_ascii
 
 
 if __name__ == '__main__':
