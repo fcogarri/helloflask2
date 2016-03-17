@@ -1,7 +1,13 @@
 import os
 import hashlib
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 import unicodedata 
+
+
+# sys.setdefaultencoding() does not exist, here!
+import sys
+reload(sys)  # Reload does the trick!
+sys.setdefaultencoding('UTF8')
 
 app = Flask(__name__)
 
@@ -11,24 +17,28 @@ def hello():
     return 'HelloWorld'
 
 
-
+@app.route('/status', methods=['GET'])
+def getStatus():
+	response = make_response('',201)
+	return response
 
 @app.route('/validarFirma', methods=['POST'])
 def validar():
 	mensaje = request.form['mensaje']
 	hash = request.form['hash']
-	respuesta = 'Falso'
+	respuesta = False
 	mensaje2=mensaje.upper()
 	mensaje3=mensaje2.lower()
-
+	mensaje4=mensaje3.lower()
 	h = hashlib.sha256()
-	h.update(mensaje2)
+	h.update(mensaje)
+	#h.update('hola')
 	hashComparar = h.hexdigest()
 
 	if hashComparar.lower() == hash.lower():
-		respuesta ='True'
+		respuesta =True
 
-	respuestaFinal = jsonify({'valido:':respuesta, 'mensaje:':mensaje,'hashReal:':hash,'hashCalculado:':hashComparar})
+	respuestaFinal = jsonify({'valido':respuesta,'mensaje':mensaje})
 	return respuestaFinal
 
 
