@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return 'caca!'
+    return 'HelloWorld'
 
 @app.route('/validarFirma', methods=['POST'])
 def validar():
@@ -15,14 +15,14 @@ def validar():
 	hash = request.form['hash']
 	respuesta = False
 
-	h=hashlib.sha256()
+	h = hashlib.sha256()
 	h.update(mensaje)
-	hashComparar=h.hexadigest()
+	hashComparar = h.hexdigest()
 
-	if hashComparar==hash:
-		respuesta=True
+	if hashComparar == hash:
+		respuesta =True
 
-	respuestaFinal=jsonify({'valido:':respuesta, 'mensaje:':mensaje})
+	respuestaFinal = jsonify({'valido:':respuesta, 'mensaje:':mensaje})
 	return respuestaFinal
 
 
