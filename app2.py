@@ -10,7 +10,7 @@ app = Flask(__name__)
 def hello():
     return 'HelloWorld'
 
-@app.route('/status', methods=['Get'])
+@app.route('/status', methods=['GET'])
 def validar():
 	hola='a'
 
